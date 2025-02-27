@@ -17,10 +17,11 @@ export default function ImagePicker({ label, name }) {
     const file = event.target.files[0];
 
     if (!file) {
-      return;
+        setPickedImage(null);
+        return;
     }
 
-    const fileReader = new FileReader();
+    const fileReader = new FileReader(); // helps converting image to url
 
     fileReader.onload = () => {
       setPickedImage(fileReader.result);
@@ -51,10 +52,11 @@ export default function ImagePicker({ label, name }) {
           name={name}
           ref={imageInput}
           onChange={handleImageChange}
+          required
         />
         <button
           className={classes.button}
-          type="button"
+          type="button" //else it will submit the surrounding form
           onClick={handlePickClick}
         >
           Pick an Image
